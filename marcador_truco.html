@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcador de Truco</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #2c3e50;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      background-color: #34495e;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      display: inline-block;
+      width: 90%;
+      max-width: 900px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+    .container:hover {
+      transform: scale(1.02);
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #f0a500;
+      font-size: 36px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .dupla {
+      margin: 20px 0;
+      padding: 20px;
+      background-color: #2c3e50;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .dupla:hover {
+      background-color: #1abc9c;
+    }
+    .dupla input {
+      width: 90%;
+      max-width: 300px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ecf0f1;
+    }
+    .score {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+    .progress-bar {
+      background-color: #ecf0f1;
+      border-radius: 10px;
+      height: 20px;
+      margin: 10px auto;
+      width: 90%;
+      max-width: 300px;
+      overflow: hidden;
+    }
+    .progress {
+      background-color: #28a745;
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+    button {
+      margin: 5px;
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button.add {
+      background: linear-gradient(45deg, #28a745, #5ed18c);
+    }
+    button.truco {
+      background: linear-gradient(45deg, #007bff, #00a9ff);
+    }
+    button.reset {
+      background: linear-gradient(45deg, #dc3545, #ff6f6f);
+    }
+    button.minus {
+      background: linear-gradient(45deg, #ffc107, #ffd54f);
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    .history {
+      margin-top: 20px;
+      text-align: left;
+      padding: 10px;
+      background-color: #16a085;
+      border-radius: 10px;
+    }
+    .history-item {
+      margin: 5px 0;
+      padding: 10px;
+      background-color: #34495e;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .history-item i {
+      margin-right: 10px;
+    }
+    .victory {
+      color: gold;
+      margin-left: 10px;
+      font-size: 24px;
+    }
+    /* Animação para o histórico */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Marcador de Truco <i class="fas fa-gamepad"></i></h1>
+
+  <!-- Dupla 1 -->
+  <div class="dupla">
+    <input type="text" id="nomeDupla1" placeholder="Nome da Dupla 1">
+    <div id="scoreDupla1" class="score">
+      Pontos: 0 <span id="victoryDupla1" class="victory"></span>
+    </div>
+    <div class="progress-bar">
+      <div id="progressDupla1" class="progress" style="width: 0%;"></div>
+    </div>
+    <button class="add" onclick="addPoints('dupla1', 1)"><i class="fas fa-plus-circle"></i> +1 Ponto</button>
+    <button class="minus" onclick="addPoints('dupla1', -1)"><i class="fas fa-minus-circle"></i> -1 Ponto</button>
+    <button class="truco" onclick="addPoints('dupla1', 3)"><i class="fas fa-star"></i> Truco +3</button>
+    <button class="truco" onclick="addPoints('dupla1', 6)"><i class="fas fa-star"></i> Truco +6</button>
+    <button class="truco" onclick="addPoints('dupla1', 9)"><i class="fas fa-star"></i> Truco +9</button>
+    <button class="truco" onclick="addPoints('dupla1', 12)"><i class="fas fa-star"></i> Truco +12</button>
+  </div>
+
+  <!-- Dupla 2 -->
+  <div class="dupla">
+    <input type="text" id="nomeDupla2" placeholder="Nome da Dupla 2">
+    <div id="scoreDupla2" class="score">
+      Pontos: 0 <span id="victoryDupla2" class="victory"></span>
+    </div>
+    <div class="progress-bar">
+      <div id="progressDupla2" class="progress" style="width: 0%;"></div>
+    </div>
+    <button class="add" onclick="addPoints('dupla2', 1)"><i class="fas fa-plus-circle"></i> +1 Ponto</button>
+    <button class="minus" onclick="addPoints('dupla2', -1)"><i class="fas fa-minus-circle"></i> -1 Ponto</button>
+    <button class="truco" onclick="addPoints('dupla2', 3)"><i class="fas fa-star"></i> Truco +3</button>
+    <button class="truco" onclick="addPoints('dupla2', 6)"><i class="fas fa-star"></i> Truco +6</button>
+    <button class="truco" onclick="addPoints('dupla2', 9)"><i class="fas fa-star"></i> Truco +9</button>
+    <button class="truco" onclick="addPoints('dupla2', 12)"><i class="fas fa-star"></i> Truco +12</button>
+  </div>
+
+  <!-- Reset -->
+  <button class="reset" onclick="resetScores()"><i class="fas fa-redo"></i> Resetar Pontos</button>
+
+  <!-- Histórico -->
+  <div class="history" id="history">
+    <h2>Histórico de Pontos</h2>
+    <div id="historyItems"></div>
+  </div>
+</div>
+
+<script>
+  let pontos = { dupla1: 0, dupla2: 0 };
+
+  function addPoints(dupla, valor) {
+    const nomeDupla = document.getElementById(`nome${dupla.charAt(0).toUpperCase() + dupla.slice(1)}`).value || `Dupla ${dupla.slice(-1)}`;
+    pontos[dupla] += valor;
+
+    if (pontos[dupla] < 0) pontos[dupla] = 0; // Evita pontos negativos.
+
+    atualizarPlacar(dupla);
+    adicionarHistorico(`${nomeDupla} +${valor} pontos`, valor > 0 ? "fa-plus-circle" : "fa-minus-circle");
+
+    if (pontos[dupla] >= 12) {
+      document.getElementById(`victory${dupla.charAt(0).toUpperCase() + dupla.slice(1)}`).innerHTML = "👑";
+    }
+  }
+
+  function resetScores() {
+    pontos = { dupla1: 0, dupla2: 0 };
+    atualizarPlacar("dupla1");
+    atualizarPlacar("dupla2");
+    document.getElementById("historyItems").innerHTML = "";
+  }
+
+  function atualizarPlacar(dupla) {
+    const nomeDupla = document.getElementById(`nome${dupla.charAt(0).toUpperCase() + dupla.slice(1)}`).value || `Dupla ${dupla.slice(-1)}`;
+    document.getElementById(`score${dupla.charAt(0).toUpperCase() + dupla.slice(1)}`).innerHTML = `Pontos: ${pontos[dupla]} <span id="victory${dupla.charAt(0).toUpperCase() + dupla.slice(1)}" class="victory"></span>`;
+    document.getElementById(`progress${dupla.charAt(0).toUpperCase() + dupla.slice(1)}`).style.width = `${Math.min((pontos[dupla] / 12) * 100, 100)}%`;
+  }
+
+  function adicionarHistorico(texto, icone) {
+    const historyItems = document.getElementById('historyItems');
+    const item = document.createElement('div');
+    item.className = 'history-item';
+    item.innerHTML = `<i class="fas ${icone}"></i> ${texto}`;
+    historyItems.insertBefore(item, historyItems.firstChild);
+  }
+</script>
+
+</body>
+</html>
